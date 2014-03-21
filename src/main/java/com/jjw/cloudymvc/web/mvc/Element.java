@@ -16,10 +16,14 @@
 
 package com.jjw.cloudymvc.web.mvc;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+
 import java.lang.annotation.*;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Documented
 public @interface Element
 {
