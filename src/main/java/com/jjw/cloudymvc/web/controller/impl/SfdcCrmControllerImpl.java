@@ -3,6 +3,7 @@ package com.jjw.cloudymvc.web.controller.impl;
 import com.jjw.cloudymvc.web.controller.AbstractCrmController;
 import com.jjw.cloudymvc.web.mvc.Element;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author jjwyse
  * @version %I%, %G%
  */
-@Controller
+@RestController
 @Element("sfdc")
 public class SfdcCrmControllerImpl extends AbstractCrmController
 {
@@ -30,7 +31,7 @@ public class SfdcCrmControllerImpl extends AbstractCrmController
         Map<String, Object> innerJson = new HashMap<String, Object>();
 
         innerJson.put("element", "sfdc");
-        json.put("account", innerJson);
+        json.put(name, innerJson);
 
         return json;
     }

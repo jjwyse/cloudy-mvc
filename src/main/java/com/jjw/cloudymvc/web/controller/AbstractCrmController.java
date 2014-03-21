@@ -16,8 +16,7 @@
 
 package com.jjw.cloudymvc.web.controller;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import com.jjw.cloudymvc.web.mvc.ElementApi;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -29,19 +28,25 @@ public abstract class AbstractCrmController
 
     protected abstract Map<String, Object> retrieve(String name, String id);
 
-    @ResponseBody
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class})
+    @ElementApi
     public Map<String, Object> createAccount(@RequestBody Map<String, Object> account)
     {
         return create("account", account);
     }
 
-    @ResponseBody
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class})
+    @ElementApi
     public Map<String, Object> retrieveAccount(@PathVariable String id)
     {
         return retrieve("account", id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET, headers = "Element-Version=hydrogen")
+    @ElementApi
+    public Map<String, Object> retrieveAccountHydrogen(@PathVariable String id)
+    {
+        return retrieve("account-hydrogen", id);
     }
 }
