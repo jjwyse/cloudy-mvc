@@ -1,6 +1,6 @@
 package com.jjw.cloudymvc.web.controller.impl;
 
-import com.jjw.cloudymvc.web.controller.CrmController;
+import com.jjw.cloudymvc.web.controller.AbstractCrmController;
 import com.jjw.cloudymvc.web.mvc.Element;
 import org.springframework.stereotype.Controller;
 
@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @Controller
 @Element("sugar")
-public class SugarCrmControllerImpl extends CrmController
+public class SugarCrmControllerImpl extends AbstractCrmController
 {
     @Override
     protected Map<String, Object> create(String name, Map<String, Object> object)
