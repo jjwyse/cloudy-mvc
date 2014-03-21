@@ -16,7 +16,7 @@
 
 package com.jjw.cloudymvc.web.controller;
 
-import com.jjw.cloudymvc.web.mvc.ElementApi;
+import com.jjw.cloudymvc.web.mvc.CloudElementApi;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -29,22 +29,22 @@ public abstract class AbstractCrmController
     protected abstract Map<String, Object> retrieve(String name, String id);
 
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    @ElementApi
+    @CloudElementApi
     public Map<String, Object> createAccount(@RequestBody Map<String, Object> account)
     {
         return create("account", account);
     }
 
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
-    @ElementApi
+    @CloudElementApi
     public Map<String, Object> retrieveAccount(@PathVariable String id)
     {
         return retrieve("account", id);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET, headers = "Element-Version=hydrogen")
-    @ElementApi
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET, headers = "CloudElement-Version=hydrogen")
+    @CloudElementApi
     public Map<String, Object> retrieveAccountHydrogen(@PathVariable String id)
     {
         return retrieve("account-hydrogen", id);

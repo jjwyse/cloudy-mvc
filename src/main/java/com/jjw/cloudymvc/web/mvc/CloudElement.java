@@ -25,7 +25,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Documented
-public @interface Element
+public @interface CloudElement
 {
     /**
      * The name of the element

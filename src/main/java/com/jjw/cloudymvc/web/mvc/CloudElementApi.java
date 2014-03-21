@@ -16,6 +16,6 @@ import java.lang.annotation.*;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {RuntimeException.class})
 @Documented
 @Inherited
-public @interface ElementApi
+public @interface CloudElementApi
 {
 }

@@ -1,8 +1,7 @@
 package com.jjw.cloudymvc.web.controller.impl;
 
 import com.jjw.cloudymvc.web.controller.AbstractCrmController;
-import com.jjw.cloudymvc.web.mvc.Element;
-import org.springframework.stereotype.Controller;
+import com.jjw.cloudymvc.web.mvc.CloudElement;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.Map;
  * @version %I%, %G%
  */
 @RestController
-@Element("sugar")
+@CloudElement("sugar")
 public class SugarCrmControllerImpl extends AbstractCrmController
 {
     @Override
