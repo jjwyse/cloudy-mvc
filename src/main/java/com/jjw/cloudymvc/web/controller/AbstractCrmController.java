@@ -25,30 +25,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 
 @RequestMapping("/crm")
-public abstract class AbstractCrmController
-{
+public abstract class AbstractCrmController {
+
     protected abstract Map<String, Object> create(String name, Map<String, Object> object);
 
     protected abstract Map<String, Object> retrieve(String name, String id);
 
     @CloudElementApi
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    public Map<String, Object> createAccount(@RequestBody Map<String, Object> account)
-    {
+    public Map<String, Object> createAccount(@RequestBody Map<String, Object> account) {
         return create("account", account);
     }
 
     @CloudElementApi
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
-    public Map<String, Object> retrieveAccount(@PathVariable String id)
-    {
+    public Map<String, Object> retrieveAccount(@PathVariable String id) {
         return retrieve("account", id);
     }
 
     @CloudElementApi
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET, headers = "CloudElement-Version=hydrogen")
-    public Map<String, Object> retrieveAccountHydrogen(@PathVariable String id)
-    {
+    public Map<String, Object> retrieveAccountHydrogen(@PathVariable String id) {
         return retrieve("account-hydrogen", id);
     }
 }

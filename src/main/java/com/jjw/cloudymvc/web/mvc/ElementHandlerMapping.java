@@ -27,11 +27,10 @@ import java.lang.reflect.Method;
  *
  * Plugged in via {@link com.jjw.cloudymvc.config.WebConfig#requestMappingHandlerMapping()}.
  */
-public class ElementHandlerMapping extends RequestMappingHandlerMapping
-{
+public class ElementHandlerMapping extends RequestMappingHandlerMapping {
+
     @Override
-    protected RequestCondition<?> getCustomTypeCondition(Class<?> handlerType)
-    {
+    protected RequestCondition<?> getCustomTypeCondition(Class<?> handlerType) {
         CloudElement cloudElementAnnotation = AnnotationUtils.findAnnotation(handlerType, CloudElement.class);
         CloudElementApi cloudElementApiAnnotation = AnnotationUtils.findAnnotation(handlerType, CloudElementApi.class);
 
@@ -39,16 +38,14 @@ public class ElementHandlerMapping extends RequestMappingHandlerMapping
     }
 
     @Override
-    protected RequestCondition<?> getCustomMethodCondition(Method method)
-    {
+    protected RequestCondition<?> getCustomMethodCondition(Method method) {
         CloudElement cloudElementMethodAnnotation = AnnotationUtils.findAnnotation(method, CloudElement.class);
         CloudElementApi cloudElementApiMethodAnnotation = AnnotationUtils.findAnnotation(method, CloudElementApi.class);
 
         return createCondition(cloudElementMethodAnnotation, cloudElementApiMethodAnnotation);
     }
 
-    private RequestCondition<?> createCondition(CloudElement cloudElement, CloudElementApi cloudElementApi)
-    {
+    private RequestCondition<?> createCondition(CloudElement cloudElement, CloudElementApi cloudElementApi) {
         // TODO - JJW
         return (cloudElement != null) ? new ElementRequestCondition(cloudElement.value()) : null;
     }

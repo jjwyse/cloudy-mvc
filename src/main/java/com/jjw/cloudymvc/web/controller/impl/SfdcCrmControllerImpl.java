@@ -15,17 +15,15 @@ import java.util.Map;
  */
 @RestController
 @CloudElement("sfdc")
-public class SfdcCrmControllerImpl extends AbstractCrmController
-{
+public class SfdcCrmControllerImpl extends AbstractCrmController {
+
     @Override
-    protected Map<String, Object> create(String name, Map<String, Object> object)
-    {
+    protected Map<String, Object> create(String name, Map<String, Object> object) {
         return object;
     }
 
     @Override
-    protected Map<String, Object> retrieve(String name, String id)
-    {
+    protected Map<String, Object> retrieve(String name, String id) {
         Map<String, Object> json = new HashMap<String, Object>();
         Map<String, Object> innerJson = new HashMap<String, Object>();
 
