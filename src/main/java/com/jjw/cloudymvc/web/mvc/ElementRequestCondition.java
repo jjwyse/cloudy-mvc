@@ -27,13 +27,9 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
 
     private ElementRequestCondition() {}
 
-    public ElementRequestCondition(Version version) {
-        this.version = version;
-    }
+    public ElementRequestCondition(Version version) { this.version = version; }
 
-    public ElementRequestCondition(String elementName) {
-        this.elementName = elementName;
-    }
+    public ElementRequestCondition(String elementName) { this.elementName = elementName; }
 
     @Override
     public ElementRequestCondition combine(ElementRequestCondition other) {
