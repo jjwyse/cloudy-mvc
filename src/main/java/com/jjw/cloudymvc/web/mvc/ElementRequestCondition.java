@@ -69,9 +69,7 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
 
     @Override
     public int compareTo(ElementRequestCondition other, HttpServletRequest request) {
-        // if this happens, more than one @CloudElement matched the URL and at this point we don't want this
-        // so throw an exception.  In the future we may want to have logic here to resolve this
-        throw new RuntimeException("Oh snap...more than one API matched the URL");
+        return other.version.getVersionNumber() - ((Version) request.getAttribute("version")).getVersionNumber();
     }
 
 }

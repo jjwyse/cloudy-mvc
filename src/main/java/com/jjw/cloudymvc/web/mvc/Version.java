@@ -17,7 +17,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum Version {
 
-    ONE(1, "one"), TWO(2, "two");
+    ONE(1, "one"), TWO(2, "two"), THREE(3, "three");
 
     /**
      * The number of this API version
