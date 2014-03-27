@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
  * @version %I%, %G%
  */
 public class ElementDispatcherServlet extends DispatcherServlet {
+
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         if (request.getHeader("token").equals("1")) {
             request.setAttribute("element", "sfdc");
         }
@@ -25,8 +27,17 @@ public class ElementDispatcherServlet extends DispatcherServlet {
             throw new Exception("No element found with given token");
         }
 
+        // default
+        request.setAttribute("version", Version.ONE);
+
+        // override if its set
         if (request.getHeader("elements-version") != null) {
-            request.setAttribute("version", Version.fromVersionName(request.getHeader("elements-version")));
+            String elementsVersion = request.getHeader("elements-version");
+            if (Version.fromVersionName(elementsVersion) == null) {
+                throw new RuntimeException("Invalid elements-version");
+            }
+
+            request.setAttribute("version", Version.fromVersionName(elementsVersion));
         }
 
         super.doService(request, response);
