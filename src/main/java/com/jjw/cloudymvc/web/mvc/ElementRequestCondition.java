@@ -20,27 +20,36 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ElementRequestCondition implements RequestCondition<ElementRequestCondition>
-{
+public class ElementRequestCondition implements RequestCondition<ElementRequestCondition> {
+
+    private Version version;
     private String elementName;
 
-    public ElementRequestCondition(String elementName)
-    {
+    private ElementRequestCondition() {}
+
+    public ElementRequestCondition(Version version) {
+        this.version = version;
+    }
+
+    public ElementRequestCondition(String elementName) {
         this.elementName = elementName;
     }
 
     @Override
-    public ElementRequestCondition combine(ElementRequestCondition other)
-    {
-        return new ElementRequestCondition(other.elementName);
+    public ElementRequestCondition combine(ElementRequestCondition other) {
+        ElementRequestCondition combo = new ElementRequestCondition();
+        combo.version = this.version == null ? other.version : this.version;
+        combo.elementName = this.elementName == null ? other.elementName : this.elementName;
+
+        return combo;
     }
 
     @Override
-    public ElementRequestCondition getMatchingCondition(HttpServletRequest request)
-    {
+    public ElementRequestCondition getMatchingCondition(HttpServletRequest request) {
         String element = (String) request.getAttribute("element");
-        if (elementName.equals(element))
-        {
+        Version version = (Version) request.getAttribute("version");
+
+        if (this.elementName.equals(element) && this.version.equals(version)) {
             return this;
         }
 
@@ -48,8 +57,7 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
     }
 
     @Override
-    public int compareTo(ElementRequestCondition other, HttpServletRequest request)
-    {
+    public int compareTo(ElementRequestCondition other, HttpServletRequest request) {
         // if this happens, more than one @CloudElement matched the URL and at this point we don't want this
         // so throw an exception.  In the future we may want to have logic here to resolve this
         throw new RuntimeException("Oh snap...more than one @CloudElement matched the URL");

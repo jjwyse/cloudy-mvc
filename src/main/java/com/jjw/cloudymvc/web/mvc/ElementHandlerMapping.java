@@ -32,22 +32,22 @@ public class ElementHandlerMapping extends RequestMappingHandlerMapping {
     @Override
     protected RequestCondition<?> getCustomTypeCondition(Class<?> handlerType) {
         CloudElement cloudElementAnnotation = AnnotationUtils.findAnnotation(handlerType, CloudElement.class);
-        CloudElementApi cloudElementApiAnnotation = AnnotationUtils.findAnnotation(handlerType, CloudElementApi.class);
 
-        return createCondition(cloudElementAnnotation, cloudElementApiAnnotation);
+        return createElementCondition(cloudElementAnnotation);
     }
 
     @Override
     protected RequestCondition<?> getCustomMethodCondition(Method method) {
-        CloudElement cloudElementMethodAnnotation = AnnotationUtils.findAnnotation(method, CloudElement.class);
         CloudElementApi cloudElementApiMethodAnnotation = AnnotationUtils.findAnnotation(method, CloudElementApi.class);
 
-        return createCondition(cloudElementMethodAnnotation, cloudElementApiMethodAnnotation);
+        return createElementCondition(cloudElementApiMethodAnnotation);
     }
 
-    private RequestCondition<?> createCondition(CloudElement cloudElement, CloudElementApi cloudElementApi) {
-        // TODO - JJW
+    private RequestCondition<?> createElementCondition(CloudElement cloudElement) {
         return (cloudElement != null) ? new ElementRequestCondition(cloudElement.value()) : null;
     }
 
+    private RequestCondition<?> createElementCondition(CloudElementApi cloudElementApi) {
+        return (cloudElementApi != null) ? new ElementRequestCondition(cloudElementApi.version()) : null;
+    }
 }
