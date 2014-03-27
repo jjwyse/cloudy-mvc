@@ -9,17 +9,15 @@ package com.jjw.cloudymvc.web.mvc;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
-
 /**
  * The enumeration which keeps track of all of the viable API versions we currently support in our system
  *
  * @author jjwyse
  * @version %I%, %G%
  */
-public enum Version{
+public enum Version {
 
-    ONE(1, "one");
+    ONE(1, "one"), TWO(2, "two");
 
     /**
      * The number of this API version

@@ -45,11 +45,26 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
         String element = (String) request.getAttribute("element");
         Version version = (Version) request.getAttribute("version");
 
-        if (this.elementName.equals(element) && this.version.equals(version)) {
-            return this;
+        if (this.elementName.equals(element)) {
+            if (equalsMyVersionOrAPreviousVersion(version)) {
+                return this;
+            }
         }
 
         return null;
+    }
+
+    private boolean equalsMyVersionOrAPreviousVersion(Version version) {
+        // base case
+        if (version == null) {
+            return false;
+        }
+
+        if (this.version.equals(version)) {
+            return true;
+        }
+
+        return equalsMyVersionOrAPreviousVersion(Version.fromVersionNumber(version.getVersionNumber() - 1));
     }
 
     @Override

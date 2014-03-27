@@ -17,6 +17,7 @@
 package com.jjw.cloudymvc.web.controller;
 
 import com.jjw.cloudymvc.web.mvc.CloudElementApi;
+import com.jjw.cloudymvc.web.mvc.Version;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,15 +38,21 @@ public abstract class AbstractCrmController {
         return create("account", account);
     }
 
-    @CloudElementApi
+    @CloudElementApi(version = Version.ONE)
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
     public Map<String, Object> retrieveAccount(@PathVariable String id) {
         return retrieve("account", id);
     }
 
+    @CloudElementApi(version = Version.TWO)
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
+    public Map<String, Object> retrieveAccountNew(@PathVariable String id) {
+        return retrieve("account-new", id);
+    }
+
     @CloudElementApi
-    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET, headers = "CloudElement-Version=hydrogen")
-    public Map<String, Object> retrieveAccountHydrogen(@PathVariable String id) {
-        return retrieve("account-hydrogen", id);
+    @RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
+    public Map<String, Object> retrieveContact(@PathVariable String id) {
+        return retrieve("contact", id);
     }
 }
