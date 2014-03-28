@@ -69,6 +69,8 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
 
     @Override
     public int compareTo(ElementRequestCondition other, HttpServletRequest request) {
+        // this ensures that when elements-version: three is sent, and we don't have a version three of the specified
+        // API, we invoke the latest version of the API
         return other.version.getVersionNumber() - ((Version) request.getAttribute("version")).getVersionNumber();
     }
 
