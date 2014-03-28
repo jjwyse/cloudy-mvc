@@ -17,5 +17,14 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface CloudElementApi {
+
+    /**
+     * @return
+     */
     Version version() default Version.ONE;
+
+    /**
+     * @return
+     */
+    boolean tokenRequired() default true;
 }

@@ -17,14 +17,13 @@ public class ElementDispatcherServlet extends DispatcherServlet {
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        if (request.getHeader("token").equals("1")) {
-            request.setAttribute("element", "sfdc");
-        }
-        else if (request.getHeader("token").equals("2")) {
-            request.setAttribute("element", "sugar");
-        }
-        else {
-            throw new Exception("No element found with given token");
+        if (request.getHeader("token") != null){
+            if (request.getHeader("token").equals("1")) {
+                request.setAttribute("element", "sfdc");
+            }
+            else if (request.getHeader("token").equals("2")) {
+                request.setAttribute("element", "sugar");
+            }
         }
 
         // default
