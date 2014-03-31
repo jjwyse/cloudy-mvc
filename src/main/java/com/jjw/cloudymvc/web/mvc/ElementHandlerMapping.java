@@ -48,6 +48,6 @@ public class ElementHandlerMapping extends RequestMappingHandlerMapping {
     }
 
     private RequestCondition<?> createElementCondition(CloudElementApi cloudElementApi) {
-        return (cloudElementApi != null) ? new ElementRequestCondition(cloudElementApi.version()) : null;
+        return (cloudElementApi != null) ? new ElementRequestCondition(cloudElementApi.version(), cloudElementApi.tokenRequired()) : null;
     }
 }

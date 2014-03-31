@@ -23,19 +23,25 @@ import javax.servlet.http.HttpServletRequest;
 public class ElementRequestCondition implements RequestCondition<ElementRequestCondition> {
 
     private Version version;
+    private Boolean isTokenRequired;
     private String elementName;
 
     private ElementRequestCondition() {}
 
-    public ElementRequestCondition(Version version) { this.version = version; }
+    public ElementRequestCondition(Version version, boolean isTokenRequired) {
+        this.version = version;
+        this.isTokenRequired = isTokenRequired;
+    }
 
     public ElementRequestCondition(String elementName) { this.elementName = elementName; }
 
     @Override
     public ElementRequestCondition combine(ElementRequestCondition other) {
         ElementRequestCondition combo = new ElementRequestCondition();
+
         combo.version = this.version == null ? other.version : this.version;
         combo.elementName = this.elementName == null ? other.elementName : this.elementName;
+        combo.isTokenRequired = this.isTokenRequired == null ? other.isTokenRequired : this.isTokenRequired;
 
         return combo;
     }
@@ -44,6 +50,11 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
     public ElementRequestCondition getMatchingCondition(HttpServletRequest request) {
         String element = (String) request.getAttribute("element");
         Version version = (Version) request.getAttribute("version");
+
+        // TODO - JJW
+        if (!this.isTokenRequired) {
+            return this;
+        }
 
         if (this.elementName.equals(element) && equalsMyVersionOrAPreviousVersion(version)) {
             return this;
