@@ -44,10 +44,12 @@ public class ElementHandlerMapping extends RequestMappingHandlerMapping {
     }
 
     private RequestCondition<?> createElementCondition(CloudElement cloudElement) {
-        return (cloudElement != null) ? new ElementRequestCondition(cloudElement.value()) : null;
+        return (cloudElement != null) ? new ElementRequestCondition(cloudElement.name()) : null;
     }
 
     private RequestCondition<?> createElementCondition(CloudElementApi cloudElementApi) {
-        return (cloudElementApi != null) ? new ElementRequestCondition(cloudElementApi.version(), cloudElementApi.tokenRequired()) : null;
+        return (cloudElementApi != null)
+                ? new ElementRequestCondition(cloudElementApi.version(), cloudElementApi.tokenRequired(), cloudElementApi.secretRequired())
+                : null;
     }
 }

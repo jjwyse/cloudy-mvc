@@ -30,6 +30,10 @@ public @interface CloudElement
     /**
      * The name of the element
      */
-    String value();
+    String name();
 
+    /**
+     * The path to the Swagger docs for these APIs
+     */
+    String documentation() default "";
 }

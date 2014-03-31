@@ -27,4 +27,9 @@ public @interface CloudElementApi {
      * @return
      */
     boolean tokenRequired() default true;
+
+    /**
+     * @return
+     */
+    boolean secretRequired() default false;
 }

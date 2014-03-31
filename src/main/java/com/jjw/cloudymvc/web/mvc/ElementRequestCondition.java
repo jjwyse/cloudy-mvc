@@ -25,13 +25,15 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
 
     private Version version;
     private Boolean isTokenRequired;
+    private Boolean isSecretRequired;
     private String elementName;
 
     private ElementRequestCondition() {}
 
-    public ElementRequestCondition(Version version, boolean isTokenRequired) {
+    public ElementRequestCondition(Version version, boolean isTokenRequired, boolean isSecretRequired) {
         this.version = version;
         this.isTokenRequired = isTokenRequired;
+        this.isSecretRequired = isSecretRequired;
     }
 
     public ElementRequestCondition(String elementName) { this.elementName = elementName; }
@@ -52,7 +54,18 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
         String element = (String) request.getAttribute("element");
         Version version = (Version) request.getAttribute("version");
 
-        if (StringUtils.isEmpty(element) && !this.isTokenRequired) {
+        // no element set, so no token, or an invalid token was passed to our API
+        if (StringUtils.isEmpty(element)) {
+            if (isTokenRequired) {
+                return null;
+            }
+
+            if (isSecretRequired) {
+                assert request.getAttribute("user") != null;
+                assert request.getAttribute("organization") != null;
+                return this;
+            }
+
             return this;
         }
 

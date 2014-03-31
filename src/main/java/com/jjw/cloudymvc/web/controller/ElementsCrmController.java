@@ -20,9 +20,12 @@ import java.util.Map;
 @RequestMapping("/elements")
 public class ElementsCrmController {
 
-    @CloudElementApi(tokenRequired = false)
+    @CloudElementApi(tokenRequired = false, secretRequired = true)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Map<String, Object> retrieveElement(@PathVariable String id) {
-        return new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("elements", id);
+
+        return map;
     }
 }

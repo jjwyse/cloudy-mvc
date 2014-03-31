@@ -14,7 +14,7 @@ import java.util.Map;
  * @version %I%, %G%
  */
 @RestController
-@CloudElement("sfdc")
+@CloudElement(name = "sfdc", documentation = "docs/sfdc.json")
 public class SfdcCrmControllerImpl extends AbstractCrmController {
 
     @Override
