@@ -16,6 +16,7 @@
 
 package com.jjw.cloudymvc.web.mvc;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,8 +52,7 @@ public class ElementRequestCondition implements RequestCondition<ElementRequestC
         String element = (String) request.getAttribute("element");
         Version version = (Version) request.getAttribute("version");
 
-        // TODO - JJW
-        if (!this.isTokenRequired) {
+        if (StringUtils.isEmpty(element) && !this.isTokenRequired) {
             return this;
         }
 
