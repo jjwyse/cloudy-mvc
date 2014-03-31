@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 
 @RequestMapping("/crm")
-public abstract class AbstractCrmController {
+public abstract class AbstractCrmController extends AbstractController {
 
     protected abstract Map<String, Object> create(String name, Map<String, Object> object);
 

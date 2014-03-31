@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/elements")
-public class ElementsCrmController {
+public class ElementsCrmController extends AbstractController {
 
     @CloudElementApi(tokenRequired = false, secretRequired = true)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
