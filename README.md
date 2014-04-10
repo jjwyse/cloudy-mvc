@@ -1,5 +1,5 @@
 =======
-cloudy-mvc
+cloudy-spring-mvc
 ==========
 
-Cloudy MVC POC
+Cloudy Spring MVC POC
