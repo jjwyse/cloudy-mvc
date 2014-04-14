@@ -13,8 +13,8 @@ import java.util.Map;
  * @author jjwyse
  * @version %I%, %G%
  */
-@RestController
 @CloudElement(name = "sugar", documentation = "docs/sugar.json")
+@RestController
 public class SugarCrmControllerImpl extends AbstractCrmController {
 
     @Override

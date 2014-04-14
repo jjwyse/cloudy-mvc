@@ -18,23 +18,28 @@ package com.jjw.cloudymvc.web.controller;
 
 import com.jjw.cloudymvc.web.mvc.CloudElementApi;
 import com.jjw.cloudymvc.web.mvc.Version;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@RestController
 @RequestMapping("/crm")
+@Api(value = "crm")
 public abstract class AbstractCrmController extends AbstractController {
 
     protected abstract Map<String, Object> create(String name, Map<String, Object> object);
 
     protected abstract Map<String, Object> retrieve(String name, String id);
 
+    @ApiOperation(value = "Creates an account")
     @CloudElementApi
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    public Map<String, Object> createAccount(@RequestBody Map<String, Object> account) {
+    public Map<String, Object> createAccount(
+            @ApiParam(required = true, name = "account", value = "The account object that needs to be created")
+            @RequestBody Map<String, Object> account) {
         return create("account", account);
     }
 

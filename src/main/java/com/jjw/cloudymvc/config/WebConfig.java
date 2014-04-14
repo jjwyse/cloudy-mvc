@@ -19,11 +19,11 @@ package com.jjw.cloudymvc.config;
 import com.jjw.cloudymvc.web.mvc.ElementHandlerMapping;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  * Spring MVC Java-based configuration.
@@ -35,21 +35,32 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  */
 @Configuration
 @EnableWebMvc
-public class WebConfig extends WebMvcConfigurationSupport
-{
+public class WebConfig extends WebMvcConfigurationSupport {
     @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry)
-    {
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
     @Override
     @Bean
-    public RequestMappingHandlerMapping requestMappingHandlerMapping()
-    {
+    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
         RequestMappingHandlerMapping handlerMapping = new ElementHandlerMapping();
         handlerMapping.setOrder(0);
         handlerMapping.setInterceptors(getInterceptors());
         return handlerMapping;
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/swaggerCrm").setViewName("swaggerCrm");
+    }
+
+    @Bean
+    public ViewResolver getViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/pages/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 }
